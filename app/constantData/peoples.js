@@ -1,0 +1,32 @@
+export const Peoples = [
+    {
+        id: 0,
+        firstname: "Asad",
+        lastname: "Mumtaz",
+        phone: "333-666-3896",
+        company: "Web Technologies",
+        project: "CRM Project",
+        note: `This is asad for Asad Mumtaz`,
+        image: 'https://www.superoffice.com/contentassets/4ea5c9a357e1497db015d857890fcea3/crm-strategy.jpg',
+    },
+    {
+        id: 1,
+        firstname: "Shahmir",
+        lastname: "Alam",
+        phone: "333-844-4051",
+        company: "StlllR Media",
+        project: "Pick me up anywhere",
+        note: `This is asad for Shahmir Alam`,
+        image: 'https://dm3z1jexb3zz4.cloudfront.net/public/images/core/Images/Wordpress-Archive/uploads/2016/01/CRM.png',
+    },
+    {
+        id: 2,
+        firstname: "Munem",
+        lastname: "Habib",
+        phone: "444-555-6666",
+        company: "Django Tech",
+        project: "Silent Device",
+        note: `This is asad for Munem Habib`,
+        image: '', // 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQum03Clx7JnxQEx4ymPJdw9fkZwglumr1TFvNjHh1Lxl3exMc1B4p4iR6JnilsmnT7ciU&usqp=CAU',
+    },
+]
