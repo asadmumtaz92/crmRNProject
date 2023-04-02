@@ -14,7 +14,7 @@ import { addition, substruction } from './redux/actions/peoples'
 import PeopleList from './components/peopleList'
 
 import AntDesign from 'react-native-vector-icons/AntDesign'
-import Icon from 'react-native-vector-icons/EvilIcons'
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
 
 
 const AppRoute = (props) => {
@@ -31,7 +31,7 @@ const AppRoute = (props) => {
             <StatusBar barStyle='light-content' backgroundColor={Colors.primery} />
 
             <View style={{flexDirection: 'row', marginVertical: 10, justifyContent: 'space-evenly', borderBottomWidth: 0.5, paddingBottom: 10 }}>
-                <Icon
+                <EvilIcons
                     name='user'
                     style={{ color: Colors.primery, fontSize: 40 }}
                 />
