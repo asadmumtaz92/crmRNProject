@@ -1,4 +1,8 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react'
+import React, { 
+    useLayoutEffect,
+    useEffect,
+    useState,
+} from 'react'
 import {
     ActivityIndicator,
     TouchableOpacity,
@@ -24,21 +28,19 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 const AppRoute = (props) => {
 
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const [visible, setVisible] = useState(false)
     const [search, setSearch] = useState('')
     const [filteredData, setFilteredData] = useState([])
     const [errorText, setErrorText] = useState('')
 
     const searchButtonHandler = () => {
-        if (visible) { // for hide
-            console.log('search 1')
+        if (visible) { // for disable
             setVisible(!visible)
             let res = props?.peopleReducer?.peopleList
             setFilteredData(res)
         }
-        else { // for show
-            console.log('search 2')
+        else { // for enable
             setVisible(!visible)
         }
     }

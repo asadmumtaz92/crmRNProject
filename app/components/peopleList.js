@@ -1,5 +1,6 @@
 import React from "react"
 import {
+    TouchableOpacity,
     StyleSheet,
     FlatList,
     Image,
@@ -17,7 +18,9 @@ const PeopleList = ( props ) => {
         let item = items.item
 
         return (
-            <View key={item.id} style={styles.card}>
+            <TouchableOpacity
+                key={item.id} style={styles.card} activeOpacity={0.9}
+            >
                 <View style={styles.topBox}>
                     <View>
                         {item.image
@@ -44,7 +47,7 @@ const PeopleList = ( props ) => {
                     <FontAwesome5 name='building' style={styles.icons} />
                     <Text style={styles.company}>{item?.company}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
