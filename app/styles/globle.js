@@ -26,4 +26,21 @@ export const gStyles = StyleSheet.create({
         height: 45,
         padding: 0,
     },
+
+    searchIcon: {
+        color: Colors.white,
+        fontWeight: '300',
+        fontSize: 20,
+    },
+    errorView: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+    },
+    errorText: {
+        color: Colors.primery,
+        alignSelf: 'center',
+        fontWeight: '500',
+        fontSize: 24,
+    },
 })

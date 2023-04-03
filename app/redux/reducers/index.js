@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
 import peopleReducer from './peoples'
-// import foodRecipeReducer from './foodRecipe'
+import companiesReducer from './companies'
 
 const rootReducer = combineReducers({
     peopleReducer: peopleReducer,
-    // foodRecipeReducer: foodRecipeReducer,
+    companiesReducer: companiesReducer,
 })
 
 export default rootReducer;

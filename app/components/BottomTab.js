@@ -11,19 +11,23 @@ import { Colors } from '../styles/color'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import Feather from 'react-native-vector-icons/Feather'
 
+import { useNavigation } from "@react-navigation/native"
+
 const BottomTab = (props) => {
+
+    const navigation = useNavigation()
 
     return (
         <View style={styles.bottomTab}>
             <TouchableOpacity
-                onPress={() => { }} activeOpacity={0.9} style={styles.tab}
+                onPress={() => navigation.navigate('Peoples')} activeOpacity={0.9} style={styles.tab}
             >
                 <Feather name='users' style={styles.icons} />
                 <Text style={styles.tabText}>PEOPLES</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => { }} activeOpacity={0.9} style={styles.tab}
+                onPress={() => navigation.navigate('Companies')} activeOpacity={0.9} style={styles.tab}
             >
                 <FontAwesome5 name='building' style={[styles.icons, { fontSize: 22 }]} />
                 <Text style={styles.tabText}>COMPANIES</Text>

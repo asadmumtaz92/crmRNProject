@@ -10,9 +10,9 @@ import {
 
 import { Colors } from '../styles/color'
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import FontAwesome5 from 'react-native-vector-icons/EvilIcons'
 
-const PeopleList = ( props ) => {
+const CompaniesList = (props) => {
 
     const renderItem = (items) => {
         let item = items?.item
@@ -24,10 +24,10 @@ const PeopleList = ( props ) => {
                 <View style={styles.topBox}>
                     <View>
                         {item?.image
-                            ? <Image source={{uri: item?.image}} style={styles.image} resizeMode="cover" />
+                            ? <Image source={{ uri: item?.image }} style={styles.image} resizeMode="cover" />
                             : <View style={styles.imageTextBox}>
                                 <Text style={styles.imageText}>
-                                    {`${item?.firstname.substring(0, 1)}${item?.lastname.substring(0, 1)}`}
+                                    {`${item?.name.substring(0, 2)}`}
                                 </Text>
                             </View>
                         }
@@ -35,17 +35,17 @@ const PeopleList = ( props ) => {
 
                     <View style={styles.nameBox}>
                         <Text style={styles.name}>
-                            {item?.firstname} {item?.lastname}
+                            {item?.name}
                         </Text>
                         <Text style={styles.desig}>
-                            {item?.desig}
+                            {item?.phone}
                         </Text>
                     </View>
                 </View>
 
                 <View style={styles.bottomBox}>
-                    <FontAwesome5 name='building' style={styles.icons} />
-                    <Text style={styles.company}>{item?.company}</Text>
+                    <FontAwesome5 name='location' style={styles.icons} />
+                    <Text style={styles.company}>{item?.location}</Text>
                 </View>
             </TouchableOpacity>
         )
@@ -55,7 +55,7 @@ const PeopleList = ( props ) => {
         <FlatList
             data={props.data}
             contentContainerStyle={styles.flatlist}
-            keyExtractor={(item) => item.id }
+            keyExtractor={(item) => item.id}
             renderItem={renderItem}
             // bounces={false}
             showsVerticalScrollIndicator={false}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
         shadowOffset: {
             height: 0,
-            width:0,
+            width: 0,
         },
         elevation: 3,
     },
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     },
     imageTextBox: {
         backgroundColor: Colors.lightgray,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 8,
         height: 90,
@@ -115,7 +115,6 @@ const styles = StyleSheet.create({
         marginLeft: 15,
     },
     name: {
-        textTransform:'capitalize',
         fontWeight: '700',
         fontSize: 22,
     },
@@ -146,8 +145,8 @@ const styles = StyleSheet.create({
     icons: {
         color: Colors.white,
         alignSelf: 'center',
-        marginRight: 8,
-        fontSize: 18,
+        // marginRight: 3,
+        fontSize: 24,
     },
     company: {
         textTransform: 'uppercase',
@@ -159,4 +158,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PeopleList
+export default CompaniesList

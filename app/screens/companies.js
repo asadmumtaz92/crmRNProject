@@ -1,4 +1,4 @@
-import React, { 
+import React, {
     useLayoutEffect,
     useEffect,
     useState,
@@ -14,18 +14,18 @@ import {
     View,
 } from 'react-native'
 
-import { Colors } from './styles/color'
-import { gStyles } from './styles/globle'
+import { Colors } from '../styles/color'
+import { gStyles } from '../styles/globle'
 
 import { connect } from 'react-redux'
 
-import PeopleList from './components/peopleList'
-import BottomTab from './components/BottomTab'
+import CompaniesList from '../components/companiesList'
+import BottomTab from '../components/BottomTab'
 
 import AntDesign from 'react-native-vector-icons/SimpleLineIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
-const AppRoute = (props) => {
+const Companies = (props) => {
 
     const [visible, setVisible] = useState(false)
     const [search, setSearch] = useState('')
@@ -35,7 +35,7 @@ const AppRoute = (props) => {
     const searchButtonHandler = () => {
         if (visible) { // for disable
             setVisible(!visible)
-            let res = props?.peopleReducer?.peopleList
+            let res = props?.companiesReducer?.companiesList
             setFilteredData(res)
         }
         else { // for enable
@@ -51,9 +51,9 @@ const AppRoute = (props) => {
                         onPress={() => searchButtonHandler()} activeOpacity={0.9}
                         style={gStyles.navBtn}
                     >
-                        {visible 
+                        {visible
                             ? <AntDesign name="close" style={gStyles.searchIcon} />
-                            : <FontAwesome5 name="search" style={gStyles.searchIcon}/>
+                            : <FontAwesome5 name="search" style={gStyles.searchIcon} />
                         }
                     </TouchableOpacity>
                 )
@@ -66,45 +66,36 @@ const AppRoute = (props) => {
     }
 
     useEffect(() => {
-        SearchPeople()
+        SearchCompany()
     }, [search, visible])
 
     useEffect(() => {
         setTimeout(() => {
-            setFilteredData(props?.peopleReducer?.peopleList)
+            setFilteredData(props?.companiesReducer?.companiesList)
         }, 1500)
     }, [])
 
     // SEARCH SHOP
-    const SearchPeople = () => {
-        const result = props?.peopleReducer?.peopleList.filter(item => item?.firstname.toLowerCase().includes(search.toLowerCase()))
+    const SearchCompany = () => {
+        const result = props?.companiesReducer?.companiesList.filter(item => item?.name.toLowerCase().includes(search.toLowerCase()))
 
         // if data found through first name
-        if(result.length > 0) {
-            let res = search.length > 0 ? result : props?.peopleReducer?.peopleList
+        if (result.length > 0) {
+            let res = search.length > 0 ? result : props?.companiesReducer?.companiesList
             setFilteredData(res)
             setErrorText('')
         }
         // find data through last name
         else {
-            let result2 = props?.peopleReducer?.peopleList.filter(item => item?.lastname.toLowerCase().includes(search.toLowerCase()))
-
-            if (result2.length) {
-                let res2 = search.length > 0 ? result2 : props?.peopleReducer?.peopleList
-                setFilteredData(res2)
-                setErrorText('')
-            }
-            else {
-                setErrorText('Result not found.')
-            }
+            setErrorText('Result not found.')
         }
     }
 
     return (
         <View style={styles.contanier}>
             <StatusBar barStyle='light-content' backgroundColor={Colors.primery} />
-            
-            {visible && 
+
+            {visible &&
                 <TextInput
                     onSubmitEditing={() => { Keyboard.dismiss(); setVisible(false) }}
                     onBlur={() => { Keyboard.dismiss(); setVisible(false) }}
@@ -126,14 +117,14 @@ const AppRoute = (props) => {
                     maxLength={20}
                 />
             }
-            
+
             <View style={{ marginHorizontal: 20, flex: 1 }}>
-                {errorText 
+                {errorText
                     ? <View style={gStyles.errorView}>
                         <Text style={gStyles.errorText}>{errorText}</Text>
                     </View>
                     : filteredData.length
-                        ? <PeopleList data={filteredData} />
+                        ? <CompaniesList data={filteredData} />
                         : <ActivityIndicator size='large' color={Colors.primery} style={{ flex: 1 }} />
                 }
             </View>
@@ -152,6 +143,6 @@ const styles = StyleSheet.create({
     },
 })
 
-const mapStateToProps = ({ peopleReducer }) => ({ peopleReducer })
+const mapStateToProps = ({ companiesReducer }) => ({ companiesReducer })
 
-export default connect(mapStateToProps, { })(AppRoute)
+export default connect(mapStateToProps, { })(Companies)
