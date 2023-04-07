@@ -5,7 +5,7 @@ export const Companies = [
         phone: `+92 333-666-3896`,
         location: `Brăila, Romania`,
         companyTag: `This is note for Asad Mumtaz`,
-        image: `https://www.superoffice.com/contentassets/4ea5c9a357e1497db015d857890fcea3/crm-strategy.jpg`,
+        image: `https://www.servcorp.com/media/29481/180427_servecorp_444_w-lake_st_4230.jpg`,
     },
     {
         id: 1,

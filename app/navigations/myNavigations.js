@@ -13,8 +13,8 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import { Colors } from '../styles/color'
 
-import Peoples from '../AppRoute'
-import Companies from '../screens/companies'
+import Peoples from '../screens/Peoples'
+import Companies from '../screens/Companies'
 // import Register from '../Slack_app/Register'
 // import Forgot from '../Slack_app/Forgot'
 // import Home from '../Slack_app/Home'

@@ -12,14 +12,27 @@ import { Colors } from '../styles/color'
 
 import FontAwesome5 from 'react-native-vector-icons/EvilIcons'
 
+import { connect, useDispatch } from 'react-redux'
+import { setCompanyDetail } from '../redux/actions/companies'
+
 const CompaniesList = (props) => {
+
+    // console.log('props: ', props?.companiesReducer?.selectedCompany)
+
+    const dispatch = useDispatch()
 
     const renderItem = (items) => {
         let item = items?.item
 
+        const detailHandler = () => {
+            dispatch(props?.setCompanyDetail(item))
+            props?.showCompDetail()
+        }
+
         return (
             <TouchableOpacity
                 key={item.id} style={styles.card} activeOpacity={0.9}
+                onPress={detailHandler}
             >
                 <View style={styles.topBox}>
                     <View>
@@ -158,4 +171,9 @@ const styles = StyleSheet.create({
     },
 })
 
-export default CompaniesList
+
+const mapStateToProps = ({ companiesReducer }) => ({ companiesReducer })
+
+export default connect(mapStateToProps, {
+    setCompanyDetail,
+})(CompaniesList)

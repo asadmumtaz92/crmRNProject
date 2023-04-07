@@ -14,22 +14,20 @@ import {
     View,
 } from 'react-native'
 
-import { Colors } from './styles/color'
-import { gStyles } from './styles/globle'
+import { Colors } from '../styles/color'
+import { gStyles } from '../styles/globle'
 
 import { connect } from 'react-redux'
 
-import PeopleList from './components/peopleList'
-import BottomTab from './components/BottomTab'
+import PeopleList from '../components/peopleList'
+import BottomTab from '../components/BottomTab'
 
-import PeopleDetail from './components/peopleDetail'
+import PeopleDetail from '../components/peopleDetail'
 
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
-const AppRoute = (props) => {
-
-    console.log('props: ', props?.peopleReducer?.selectedPeople)
+const Peoples = (props) => {
 
     const [visible, setVisible] = useState(false)
     const [search, setSearch] = useState('')
@@ -104,10 +102,17 @@ const AppRoute = (props) => {
         }
     }
 
+    const [showDetail, setShowDetail] = useState(false)
+    const showPeoDetail = () => {
+        setShowDetail(true)
+    }
+    const hidePeoDetail = () => {
+        setShowDetail(false)
+    }
+
     return (
         <View style={styles.contanier}>
             <StatusBar barStyle='light-content' backgroundColor={Colors.primery} />
-            <PeopleDetail />
             
             {visible && 
                 <TextInput
@@ -138,10 +143,12 @@ const AppRoute = (props) => {
                         <Text style={gStyles.errorText}>{errorText}</Text>
                     </View>
                     : filteredData.length
-                        ? <PeopleList data={filteredData} />
+                        ? <PeopleList data={filteredData} showPeoDetail={showPeoDetail} />
                         : <ActivityIndicator size='large' color={Colors.primery} style={{ flex: 1 }} />
                 }
             </View>
+
+            {showDetail && <PeopleDetail hidePeoDetail={hidePeoDetail} />}
 
             {/* BOOTOM TABS */}
             <BottomTab />
@@ -157,6 +164,10 @@ const styles = StyleSheet.create({
     },
 })
 
-const mapStateToProps = ({ peopleReducer }) => ({ peopleReducer })
+const mapStateToProps = ({ peopleReducer }) => ({ 
+    peopleReducer,
+})
 
-export default connect(mapStateToProps, { })(AppRoute)
+export default connect(mapStateToProps, {
+
+})(Peoples)

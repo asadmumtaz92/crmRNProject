@@ -22,6 +22,8 @@ import { connect } from 'react-redux'
 import CompaniesList from '../components/companiesList'
 import BottomTab from '../components/BottomTab'
 
+import CompanyDetail from '../components/companyDetail'
+
 import AntDesign from 'react-native-vector-icons/SimpleLineIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
@@ -91,6 +93,14 @@ const Companies = (props) => {
         }
     }
 
+    const [showDetail, setShowDetail] = useState(false)
+    const showCompDetail = () => {
+        setShowDetail(true)
+    }
+    const hideCompDetail = () => {
+        setShowDetail(false)
+    }
+
     return (
         <View style={styles.contanier}>
             <StatusBar barStyle='light-content' backgroundColor={Colors.primery} />
@@ -124,10 +134,12 @@ const Companies = (props) => {
                         <Text style={gStyles.errorText}>{errorText}</Text>
                     </View>
                     : filteredData.length
-                        ? <CompaniesList data={filteredData} />
+                        ? <CompaniesList data={filteredData} showCompDetail={showCompDetail} />
                         : <ActivityIndicator size='large' color={Colors.primery} style={{ flex: 1 }} />
                 }
             </View>
+
+            {showDetail && <CompanyDetail hideCompDetail={hideCompDetail} />}
 
             {/* BOOTOM TABS */}
             <BottomTab />
@@ -143,6 +155,10 @@ const styles = StyleSheet.create({
     },
 })
 
-const mapStateToProps = ({ companiesReducer }) => ({ companiesReducer })
+const mapStateToProps = ({ companiesReducer }) => ({ 
+    companiesReducer,
+})
 
-export default connect(mapStateToProps, { })(Companies)
+export default connect(mapStateToProps, {
+    
+})(Companies)

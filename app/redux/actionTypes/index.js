@@ -4,6 +4,6 @@ export const INCREEMENT = "INCREEMENT"
 
 export const DECREEMENT = "DECREEMENT"
 
-export const PEOPLES = "PEOPLES"
+export const SELECTED_PEOPLES = "SELECTED_PEOPLES"
 
-export const COMPANIES = "COMPANIES"
+export const SELECTED_COMPANIES = "SELECTED_COMPANIES"
