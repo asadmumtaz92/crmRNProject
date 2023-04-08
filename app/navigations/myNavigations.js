@@ -13,9 +13,8 @@ import { NavigationContainer } from '@react-navigation/native'
 
 import { Colors } from '../styles/color'
 
-import AppRoute from '../AppRoute'
-
-// import Login from '../Slack_app/index'
+import Peoples from '../screens/Peoples'
+import Companies from '../screens/Companies'
 // import Register from '../Slack_app/Register'
 // import Forgot from '../Slack_app/Forgot'
 // import Home from '../Slack_app/Home'
@@ -45,7 +44,7 @@ const myNav = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName='AppRoute'
+                initialRouteName='Peoples'
                 screenOptions={{
                     headerTitleStyle: styles.headerTitleStyle,
                     headerStyle: styles.headerStyle,
@@ -58,11 +57,11 @@ const myNav = () => {
                 }}
             >
                 <Stack.Screen
-                    name='AppRoute'
-                    component={AppRoute}
+                    name='Peoples'
+                    component={Peoples}
                     options={{
-                        title: 'INITIAL SCREEN',
-                        // headerTitle: () => myTitle(`Initial Screen`),
+                        // title: 'INITIAL SCREEN',
+                        headerTitle: () => myTitle(`PEOPLE LIST`),
                         // headerLeft: () => myLink('', () => { console.log('left') }),
                         // headerRight: () => myLink('', () => { console.log('right') }),
                     }}
@@ -73,6 +72,16 @@ const myNav = () => {
                     //     }
                     // }}
                 />
+                <Stack.Screen
+                    name='Companies'
+                    component={Companies}
+                    options={{
+                        headerTitle: () => myTitle(`Companies`),
+                        // headerLeft: () => myLink('', () => { console.log('left') }),
+                        // headerRight: () => myLink('', () => { console.log('right') }),
+                    }}
+                />
+                
             </Stack.Navigator>
         </NavigationContainer>
     )

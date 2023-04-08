@@ -1,5 +1,6 @@
 import React from "react"
 import {
+    TouchableOpacity,
     StyleSheet,
     FlatList,
     Image,
@@ -11,16 +12,30 @@ import { Colors } from '../styles/color'
 
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
+import { connect, useDispatch } from 'react-redux'
+import { setPeopleDetail } from '../redux/actions/peoples'
+
 const PeopleList = ( props ) => {
+    // console.log()
+
+    const dispatch = useDispatch()
 
     const renderItem = (items) => {
-        let item = items.item
+        let item = items?.item
+
+        const detailHandler = () => {
+            dispatch(props?.setPeopleDetail(item))
+            props?.showPeoDetail()
+        }
 
         return (
-            <View key={item.id} style={styles.card}>
+            <TouchableOpacity
+                key={item.id} style={styles.card} activeOpacity={0.9}
+                onPress={detailHandler}
+            >
                 <View style={styles.topBox}>
                     <View>
-                        {item.image
+                        {item?.image
                             ? <Image source={{uri: item?.image}} style={styles.image} resizeMode="cover" />
                             : <View style={styles.imageTextBox}>
                                 <Text style={styles.imageText}>
@@ -44,7 +59,7 @@ const PeopleList = ( props ) => {
                     <FontAwesome5 name='building' style={styles.icons} />
                     <Text style={styles.company}>{item?.company}</Text>
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -156,4 +171,8 @@ const styles = StyleSheet.create({
     },
 })
 
-export default PeopleList
+const mapStateToProps = ({ peopleReducer }) => ({ peopleReducer })
+
+export default connect(mapStateToProps, {
+    setPeopleDetail,
+})(PeopleList)

@@ -4,6 +4,7 @@ import { Peoples } from '../../constantData/peoples'
 const initialState = {
     counter: 0,
     peopleList: Peoples,
+    selectedPeople: {},
 }
 
 const peopleReducer = (state = initialState, action) => {
@@ -19,6 +20,12 @@ const peopleReducer = (state = initialState, action) => {
             return {
                 ...state,
                 counter: state.counter - 1
+            }
+        }
+        case types.SELECTED_PEOPLES: {
+            return {
+                ...state,
+                selectedPeople: action.selectedPeople
             }
         }
         default: {

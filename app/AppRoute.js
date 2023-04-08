@@ -1,4 +1,8 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react'
+import React, { 
+    useLayoutEffect,
+    useEffect,
+    useState,
+} from 'react'
 import {
     ActivityIndicator,
     TouchableOpacity,
@@ -13,32 +17,32 @@ import {
 import { Colors } from './styles/color'
 import { gStyles } from './styles/globle'
 
-import { connect, useDispatch } from 'react-redux'
-import { addition, substruction } from './redux/actions/peoples'
+import { connect } from 'react-redux'
 
 import PeopleList from './components/peopleList'
 import BottomTab from './components/BottomTab'
 
-import AntDesign from 'react-native-vector-icons/SimpleLineIcons'
+import PeopleDetail from './components/peopleDetail'
+
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 
 const AppRoute = (props) => {
 
-    const dispatch = useDispatch()
+    console.log('props: ', props?.peopleReducer?.selectedPeople)
+
     const [visible, setVisible] = useState(false)
     const [search, setSearch] = useState('')
     const [filteredData, setFilteredData] = useState([])
     const [errorText, setErrorText] = useState('')
 
     const searchButtonHandler = () => {
-        if (visible) { // for hide
-            console.log('search 1')
+        if (visible) { // for disable
             setVisible(!visible)
             let res = props?.peopleReducer?.peopleList
             setFilteredData(res)
         }
-        else { // for show
-            console.log('search 2')
+        else { // for enable
             setVisible(!visible)
         }
     }
@@ -52,8 +56,8 @@ const AppRoute = (props) => {
                         style={gStyles.navBtn}
                     >
                         {visible 
-                            ? <AntDesign name="close" style={styles.searchIcon} />
-                            : <FontAwesome5 name="search" style={styles.searchIcon}/>
+                            ? <SimpleLineIcons name="close" style={gStyles.searchIcon} />
+                            : <FontAwesome5 name="search" style={gStyles.searchIcon}/>
                         }
                     </TouchableOpacity>
                 )
@@ -66,17 +70,17 @@ const AppRoute = (props) => {
     }
 
     useEffect(() => {
-        SearchShop()
+        SearchPeople()
     }, [search, visible])
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         setTimeout(() => {
             setFilteredData(props?.peopleReducer?.peopleList)
         }, 1500)
     }, [])
 
     // SEARCH SHOP
-    const SearchShop = () => {
+    const SearchPeople = () => {
         const result = props?.peopleReducer?.peopleList.filter(item => item?.firstname.toLowerCase().includes(search.toLowerCase()))
 
         // if data found through first name
@@ -103,6 +107,7 @@ const AppRoute = (props) => {
     return (
         <View style={styles.contanier}>
             <StatusBar barStyle='light-content' backgroundColor={Colors.primery} />
+            <PeopleDetail />
             
             {visible && 
                 <TextInput
@@ -129,8 +134,8 @@ const AppRoute = (props) => {
             
             <View style={{ marginHorizontal: 20, flex: 1 }}>
                 {errorText 
-                    ? <View style={styles.errorView}>
-                        <Text style={styles.errorText}>{errorText}</Text>
+                    ? <View style={gStyles.errorView}>
+                        <Text style={gStyles.errorText}>{errorText}</Text>
                     </View>
                     : filteredData.length
                         ? <PeopleList data={filteredData} />
@@ -140,68 +145,18 @@ const AppRoute = (props) => {
 
             {/* BOOTOM TABS */}
             <BottomTab />
-            
-            <View>
-                {/* <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginHorizontal: 20}}>
-                    <TouchableOpacity onPress={() => dispatch(substruction())} style={styles.btn} activeOpacity={0.9}>
-                        <Text style={styles.btnText}>-</Text>
-                    </TouchableOpacity>
-
-                    <Text style={{marginHorizontal: 20, textAlign:'center', alignSelf: 'center', fontWeight: '700', fontSize: 20, color: Colors.black}}>
-                        {props?.peopleReducer?.counter}
-                    </Text>
-
-                    <TouchableOpacity onPress={() => dispatch(addition())} style={styles.btn} activeOpacity={0.9}>
-                        <Text style={styles.btnText}>+</Text>
-                    </TouchableOpacity>
-                </View> */}
-            </View>
 
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    searchIcon: {
-        color: Colors.white,
-        fontWeight: '300',
-        fontSize: 20,
-    },
     contanier: {
         backgroundColor: Colors.white,
         flex: 1,
     },
-    errorView: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1,
-    },
-    errorText: {
-        color: Colors.primery,
-        alignSelf: 'center',
-        fontWeight: '500',
-        fontSize: 24,
-    },
-    // btn: {
-    //     backgroundColor: Colors.primery,
-    //     alignSelf: 'center',
-    //     marginVertical: 13,
-    //     borderRadius: 5,
-    //     width: 60,
-    // },
-    // btnText: {
-    //     textTransform: 'uppercase',
-    //     color: Colors.white,
-    //     paddingVertical: 8,
-    //     textAlign: 'center',
-    //     fontWeight: '500',
-    //     fontSize: 18,
-    // },
 })
 
 const mapStateToProps = ({ peopleReducer }) => ({ peopleReducer })
 
-export default connect(mapStateToProps, {
-    addition,
-    substruction,
-})(AppRoute)
+export default connect(mapStateToProps, { })(AppRoute)

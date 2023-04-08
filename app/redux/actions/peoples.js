@@ -1,13 +1,8 @@
 import * as types from '../actionTypes/index'
 
-export const addition = () => {
+export const setPeopleDetail = (data) => {
     return {
-        type: types.INCREEMENT
-    }
-}
-
-export const substruction = () => {
-    return {
-        type: types.DECREEMENT
+        type: types.SELECTED_PEOPLES,
+        selectedPeople: data
     }
 }
